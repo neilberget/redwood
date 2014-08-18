@@ -16,6 +16,10 @@ Or install it yourself as:
 
     $ gem install redwood
 
+## Testing
+
+bundle exec rspec spec
+
 ## Usage
 
 TODO: Write usage instructions here

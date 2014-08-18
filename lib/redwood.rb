@@ -17,12 +17,19 @@ module Redwood
       else
         parent = find(parent_name)
         if parent
+          new_parent = false
           parent.children << child
+          @root.remove(child) unless @root == parent
         else
+          new_parent = true
           parent = Node.new(parent_name, [child])
         end
 
-        @root = parent if @root.nil? || new_root
+        if @root.nil? || new_root
+          @root = parent
+        elsif new_parent
+          @root.children << parent
+        end
       end
     end
 
@@ -47,6 +54,10 @@ module Redwood
       end
 
       node
+    end
+
+    def remove(child)
+      children.delete child
     end
 
     def order

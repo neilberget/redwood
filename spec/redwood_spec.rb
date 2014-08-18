@@ -33,6 +33,14 @@ describe Redwood do
     expect(tree.root.children.map(&:name)).to eq([:child1, :child2])
   end
 
+  it "add a child to a non-existent parent node", focus: true do
+    tree.add :a, :b
+    tree.add :b, :c
+    tree.add :d, :e
+    tree.add :e, :b
+    expect(tree.order).to eq([:c, :b, :a, :e, :d])
+  end
+
   it "can create a new root" do
     tree.add :node1, :node2
     tree.add :node2, :node3
